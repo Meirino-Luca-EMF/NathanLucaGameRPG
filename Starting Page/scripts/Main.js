@@ -9,6 +9,8 @@ for (let i = 0; i < 30; i++) {
   el.style.animationDuration = (8 + Math.random() * 14) + 's';
   el.style.animationDelay = (-Math.random() * 20) + 's';
   el.style.fontSize = (1 + Math.random() * 2) + 'rem';
+  el.style.userSelect = 'none';
+  el.style.webkitUserSelect = 'none';
   floatersEl.appendChild(el);
 }
 
@@ -60,17 +62,18 @@ function showGamePlaceholder() {
     'position:fixed', 'inset:0', 'z-index:300',
     'background:var(--black)',
     'display:flex', 'align-items:center', 'justify-content:center',
-    'flex-direction:column', 'gap:1.5rem'
+    'flex-direction:column', 'gap:1.5rem',
+    'user-select:none', '-webkit-user-select:none'
   ].join(';');
   placeholder.innerHTML =
-    '<div style="background:var(--paper);color:var(--ink);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--yellow);padding:2.5rem 3rem;text-align:center;transform:rotate(-0.4deg);max-width:min(520px,90vw);">' +
-      '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:3rem;text-shadow:3px 3px 0 var(--red)">TUESDAY, 7:43 AM</div>' +
+    '<div style="background:var(--paper);color:var(--ink);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--yellow);padding:2.5rem 3rem;text-align:center;transform:rotate(-0.4deg);max-width:min(520px,90vw);user-select:none;-webkit-user-select:none;">' +
+      '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:3rem;text-shadow:3px 3px 0 var(--red);user-select:none;-webkit-user-select:none;">TUESDAY, 7:43 AM</div>' +
       '<hr style="border:none;border-top:2px dashed rgba(26,18,0,0.3);margin:1rem 0">' +
-      '<div style="font-family:\'Permanent Marker\',cursive;font-size:1.1rem;color:var(--red)">You wake up on the floor of your apartment.<br>Rent is due in 3 days. You have $0.00.</div>' +
+      '<div style="font-family:\'Permanent Marker\',cursive;font-size:1.1rem;color:var(--red);user-select:none;-webkit-user-select:none;">You wake up on the floor of your apartment.<br>Rent is due in 3 days. You have $0.00.</div>' +
       '<hr style="border:none;border-top:2px dashed rgba(26,18,0,0.3);margin:1rem 0">' +
-      '<div style="font-family:\'VT323\',monospace;font-size:1rem;opacity:0.6;letter-spacing:0.1em">— GAME WORLD LOADING SOON —</div>' +
+      '<div style="font-family:\'VT323\',monospace;font-size:1rem;opacity:0.6;letter-spacing:0.1em;user-select:none;-webkit-user-select:none;">— GAME WORLD LOADING SOON —</div>' +
     '</div>' +
-    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.75rem;color:rgba(255,230,0,0.5);letter-spacing:0.15em;animation:blink 1s step-end infinite">[ THE ADVENTURE BEGINS HERE ]</div>';
+    '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.75rem;color:rgba(255,230,0,0.5);letter-spacing:0.15em;animation:blink 1s step-end infinite;user-select:none;-webkit-user-select:none;">[ THE ADVENTURE BEGINS HERE ]</div>';
   document.body.appendChild(placeholder);
 }
 
