@@ -1,0 +1,306 @@
+/* ========================================
+   CINEMATIC — DREAM SEQUENCE
+   ======================================== */
+
+/* ---- CINEMATIC OVERLAY ---- */
+#cinematic {
+    position: fixed; inset: 0; z-index: 500;
+    display: none;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  #cinematic.active { display: flex; }
+  
+  /* Dream phase: gold/warm */
+  #cinematic.phase-dream {
+    background: #1a0e00;
+  }
+  /* Explosion phase: white flash then black */
+  #cinematic.phase-explode {
+    background: var(--black);
+  }
+  
+  /* ---- LETTERBOX BARS ---- */
+  #cinematic .lbox-top,
+  #cinematic .lbox-bot {
+    position: absolute; left: 0; right: 0; height: 80px;
+    background: var(--black);
+    z-index: 10;
+    transition: height 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  #cinematic .lbox-top { top: 0; }
+  #cinematic .lbox-bot { bottom: 0; }
+  #cinematic.bars-open .lbox-top,
+  #cinematic.bars-open .lbox-bot { height: 0; }
+  
+  /* ---- DREAM SCENE ---- */
+  .dream-scene {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+  .dream-scene.visible { opacity: 1; }
+  
+  /* Warm golden vignette behind each scene */
+  .dream-scene::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none; z-index: 1;
+  }
+  
+  /* Dream BG colours per scene */
+  .dream-scene.s1 { background: linear-gradient(135deg, #2a1500 0%, #6b3800 50%, #2a1500 100%); }
+  .dream-scene.s2 { background: linear-gradient(135deg, #001a2a 0%, #003d5c 50%, #001a2a 100%); }
+  .dream-scene.s3 { background: linear-gradient(135deg, #1a0025 0%, #4a006b 50%, #1a0025 100%); }
+  .dream-scene.s4 { background: linear-gradient(135deg, #001a00 0%, #005c00 50%, #001a00 100%); }
+  
+  /* ---- SCENE CONTENT ---- */
+  .scene-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 700px;
+  }
+  
+  /* Big emoji illustration */
+  .scene-emoji {
+    font-size: clamp(5rem, 15vw, 10rem);
+    display: block;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 30px rgba(255,220,50,0.6));
+    animation: floatScene 3s ease-in-out infinite;
+  }
+  @keyframes floatScene {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50%       { transform: translateY(-12px) rotate(2deg); }
+  }
+  
+  /* Caption box — torn paper style */
+  .scene-caption {
+    background: var(--paper);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    position: relative;
+    box-shadow: 5px 5px 0 var(--yellow);
+    transform: rotate(-1deg);
+    animation: captionPop 0.4s cubic-bezier(.17,.67,.44,1.4) both;
+  }
+  @keyframes captionPop {
+    from { transform: rotate(-1deg) scale(0.6); opacity: 0; }
+    to   { transform: rotate(-1deg) scale(1);   opacity: 1; }
+  }
+  .scene-caption .caption-label {
+    font-family: 'VT323', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    text-transform: uppercase;
+    display: block;
+  }
+  .scene-caption .caption-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    display: block;
+    text-shadow: 3px 3px 0 var(--red);
+  }
+  .scene-caption .caption-sub {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 0.85rem;
+    color: var(--red);
+    display: block;
+    margin-top: 0.2rem;
+  }
+  
+  /* ---- FLOATING GOLD ---- */
+  .dream-floaters {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  .dream-floater {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatUp linear infinite;
+    opacity: 0.25;
+    user-select: none;
+  }
+  
+  /* ---- NARRATION TAPE ---- */
+  .narration-tape {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-0.5deg);
+    background: rgba(255,230,0,0.92);
+    color: var(--ink);
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    padding: 6px 40px;
+    white-space: nowrap;
+    border: 2px solid var(--ink);
+    z-index: 10;
+    box-shadow: 4px 4px 0 var(--ink);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    max-width: 90vw;
+    text-align: center;
+    white-space: normal;
+  }
+  .narration-tape.visible { opacity: 1; }
+  
+  /* ---- DREAM COUNTER ---- */
+  .dream-counter {
+    position: absolute;
+    top: 90px; right: 2rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    color: rgba(255,220,50,0.5);
+    z-index: 10;
+    letter-spacing: 0.1em;
+  }
+  
+  /* ---- PROGRESS DOTS ---- */
+  .progress-dots {
+    position: absolute;
+    bottom: 92px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 10;
+  }
+  .prog-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,220,50,0.5);
+    background: transparent;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .prog-dot.done {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  
+  /* ---- DREAM ZZZ HEADER ---- */
+  .dream-header {
+    position: absolute;
+    top: 90px; left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: rgba(255,220,50,0.35);
+    letter-spacing: 0.3em;
+    z-index: 10;
+    white-space: nowrap;
+    animation: driftZzz 4s ease-in-out infinite;
+  }
+  @keyframes driftZzz {
+    0%, 100% { transform: translateX(-50%) rotate(-1deg) translateY(0); }
+    50%       { transform: translateX(-50%) rotate(1deg) translateY(-4px); }
+  }
+  
+  /* ---- EXPLOSION ---- */
+  .flash-layer {
+    position: absolute; inset: 0; z-index: 20;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .flash-layer.bang { animation: flashBang 0.15s ease-out forwards; }
+  @keyframes flashBang {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  .explosion-emojis {
+    position: absolute; inset: 0; z-index: 15;
+    pointer-events: none; overflow: hidden;
+  }
+  .exp-emoji {
+    position: absolute;
+    font-size: 3rem;
+    animation: explodeOut 1.2s ease-out forwards;
+    opacity: 1;
+  }
+  @keyframes explodeOut {
+    0%   { transform: translate(0,0) scale(0.5) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(2) rotate(var(--dr)); opacity: 0; }
+  }
+  
+  /* Alarm clock shake */
+  .alarm-shake {
+    animation: alarmShake 0.08s linear infinite;
+  }
+  @keyframes alarmShake {
+    0%,100% { transform: translateX(0) rotate(-2deg); }
+    25%     { transform: translateX(-6px) rotate(2deg); }
+    75%     { transform: translateX(6px) rotate(-2deg); }
+  }
+  
+  /* ---- WAKE UP SCREEN ---- */
+  #wakeup-screen {
+    position: absolute; inset: 0; z-index: 25;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  #wakeup-screen.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .wakeup-card {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--red);
+    padding: 2.5rem 3rem;
+    text-align: center;
+    max-width: min(500px, 90vw);
+    transform: rotate(-0.5deg);
+    animation: wobble 4s ease-in-out infinite;
+  }
+  .wakeup-emoji {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: alarmShake 0.1s linear infinite;
+  }
+  .wakeup-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--red);
+    line-height: 0.9;
+    display: block;
+  }
+  .wakeup-sub {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1rem;
+    color: var(--red);
+    display: block;
+    margin-top: 0.5rem;
+  }
+  .wakeup-stats {
+    margin-top: 1.2rem;
+    border-top: 2px dashed rgba(26,18,0,0.3);
+    padding-top: 1rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-align: left;
+    line-height: 1.8;
+  }
+  .wakeup-continue {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(255,230,0,0.6);
+    letter-spacing: 0.15em;
+    animation: blink 1s step-end infinite;
+    text-transform: uppercase;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
