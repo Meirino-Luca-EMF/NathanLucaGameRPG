@@ -7,9 +7,9 @@
 
 const TILE  = 16;
 const SCALE = 3;
-const S     = TILE * SCALE;   // 48 px/tile
-const COLS  = 22;
-const ROWS  = 16;
+const S     = TILE * SCALE;
+const COLS  = 24;
+const ROWS  = 18;
 
 /* ── MONEY ── */
 function loadMoney(){ return parseInt(localStorage.getItem('rts_money')||'0',10); }
@@ -74,7 +74,7 @@ const C = {
   hintBg:'#ffe600',hintTx:'#1a1200',
 };
 
-/* ══════ MAP (22×16) — simple open room, outer walls only ══════
+/* ══════ MAP (24×18) — simple open room, outer walls only ══════
    0=floor  2=floor-crack  3=rug  4=void  5=hole-rim
    N=north-wall  S=south-wall  W=west-wall  E=east-wall
    NW/NE/SW/SE=corners  D=door
@@ -83,23 +83,25 @@ const _=0,CK=2,RG=3,VD=4,HR=5;
 const N=10,Sv=11,Wl=12,Er=13,NW=20,NE=21,SW=22,SE=23,DR=30;
 
 const MAP = [
-//  0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21
-  [NW,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,  NE],// 0
-  [Wl,  RG,  RG,  RG,  RG,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 1
-  [Wl,  RG,  RG,  RG,  RG,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 2
-  [Wl,  RG,  RG,  RG,  RG,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 3
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 4
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 5
-  [Wl,   _,   _,   CK,  _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 6
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 7
-  [Wl,   _,   _,   _,   _,   _,   HR,  VD,  VD,  HR,  _,   _,   _,   _,   _,   _,   _,   CK,  _,   _,   _,  Er],// 8  HOLE
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 9
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//10
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//11
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//12
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   CK,  _,   _,   _,   _,   _,   _,  Er],//13
-  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//14
-  [SW,   Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  DR,  DR,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv, SE],//15
+//  0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23
+  [NW,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,   N,  NE],// 0
+  [Wl,  RG,  RG,  RG,  RG,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 1
+  [Wl,  RG,  RG,  RG,  RG,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 2
+  [Wl,  RG,  RG,  RG,  RG,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 3
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 4
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 5
+  [Wl,   _,   _,   CK,  _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 6
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 7
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],// 8
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   CK,  _,   _,   _,   _,   _,  Er],// 9
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//10
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//11
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   HR,  VD,  HR,  _,   _,   _,   _,  Er],//12  HOLE (bottom-right, away from table)
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//13
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//14
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   CK,  _,   _,   _,   _,   _,   _,   _,   _,  Er],//15
+  [Wl,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,   _,  Er],//16
+  [SW,   Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  DR,  DR,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv,  Sv, SE],//17
 ];
 
 const SOLID_T = new Set([N,Sv,Wl,Er,NW,NE,SW,SE]);
@@ -231,7 +233,7 @@ OBJECTS.push({
 /* TV + STAND — north wall, cols 7-9 */
 OBJECTS.push({
   tx:7,ty:1,w:3,h:2,
-  hx:7,hy:2,hw:3,hh:1,
+  hx:7,hy:1,hw:3,hh:2,
   label:'Télé',
   lines:['"CRT 1994. Une chaîne : météo Kazakhstan."','"4 bandes de scotch. Solide comme l\'espoir."','"LED verte clignotante = problème non résolu."'],
   draw(ctx){
@@ -287,7 +289,7 @@ OBJECTS.push({
 /* STOVE — north wall, cols 13-14 */
 OBJECTS.push({
   tx:13,ty:1,w:2,h:2,
-  hx:13,hy:2,hw:2,hh:1,
+  hx:13,hy:1,hw:2,hh:2,
   label:'Cuisinière',
   lines:['"Le feu fonctionne. Seulement le feu."','"Le four bloqué depuis 2018. Un mystère."','"Brûleur gauche met le feu. Pour de vrai."'],
   draw(ctx){
@@ -316,7 +318,7 @@ OBJECTS.push({
 /* COUNTER — north wall, cols 15-17 */
 OBJECTS.push({
   tx:15,ty:1,w:3,h:2,
-  hx:15,hy:2,hw:3,hh:1,
+  hx:15,hy:1,hw:3,hh:2,
   label:'Plan de travail',
   lines:['"De la farine partout. Tu n\'as pas de farine."','"Couteau, 4 tasses, le désespoir."'],
   draw(ctx){
@@ -346,7 +348,7 @@ OBJECTS.push({
 /* SINK — north wall, cols 18-19 */
 OBJECTS.push({
   tx:18,ty:1,w:2,h:2,
-  hx:18,hy:2,hw:2,hh:1,
+  hx:18,hy:1,hw:2,hh:2,
   label:'Évier',
   lines:['"Eau chaude morte en 2020."','"Jean-Pierre le cafard habite sous le robinet."','"4 tasses dedans depuis lundi."'],
   draw(ctx){
@@ -369,7 +371,7 @@ OBJECTS.push({
 /* FRIDGE — north wall, col 20 */
 OBJECTS.push({
   tx:20,ty:1,w:1,h:3,
-  hx:20,hy:2,hw:1,hh:2,
+  hx:20,hy:1,hw:1,hh:3,
   label:'Frigo',
   lines:['"Moutarde périmée depuis Obama, et de l\'espoir."','"Bruit bizarre. Tu n\'enquêtes pas."','"Sticky : \'LOYER!!!\'. Tu l\'as mis toi-même."'],
   draw(ctx){
@@ -395,8 +397,8 @@ OBJECTS.push({
 
 /* BOOKSHELF — east wall, rows 5-9 */
 OBJECTS.push({
-  tx:20,ty:5,w:1,h:5,
-  hx:20,hy:5,hw:1,hh:5,
+  tx:20,ty:5,w:1,h:4,
+  hx:20,hy:5,hw:1,hh:4,
   label:'Bibliothèque',
   lines:['"3 livres et 9 bières vides. Culturel."','"\'Devenir riche en 30 jours\'. Page 1. Jamais terminé."'],
   draw(ctx){
@@ -444,8 +446,8 @@ OBJECTS.push({
 
 /* SINK BATHROOM — east wall, rows 8-9 */
 OBJECTS.push({
-  tx:20,ty:8,w:2,h:2,
-  hx:20,hy:8,hw:2,hh:2,
+  tx:20,ty:9,w:2,h:2,
+  hx:20,hy:9,hw:2,hh:2,
   label:'Lavabo',
   lines:['"Eau froide uniquement depuis 2019."','"Trace de rouge à lèvres sur le miroir. Tu n\'as pas de rouge à lèvres."'],
   draw(ctx){
@@ -811,7 +813,10 @@ const keys={};
 let pendingPickup=null,pendingCoin=false;
 document.addEventListener('keydown',e=>{
   keys[e.key.toLowerCase()]=true;
-  if(e.key.toLowerCase()==='e') tryInteract();
+  if(e.key.toLowerCase()==='e'){
+    if(gameState==='dialog') advanceDialog();
+    else tryInteract();
+  }
   if(e.key.toLowerCase()==='q') toggleInventory();
   if(e.key==='Escape') togglePause();
 });
@@ -850,9 +855,11 @@ function startWorld(){
 function resizeGame(){
   const W=window.innerWidth,H=window.innerHeight,mW=COLS*S,mH=ROWS*S;
   canvas.width=mW; canvas.height=mH;
-  const fit=Math.min(W/mW,H/mH);
-  canvas.style.width=mW*fit+'px'; canvas.style.height=mH*fit+'px';
-  canvas.style.left=((W-mW*fit)/2)+'px'; canvas.style.top=((H-mH*fit)/2)+'px';
+  // Fit entire map in screen with small padding
+  const fit=Math.min((W-16)/mW,(H-56)/mH); // 56px for HUD top bar
+  const dW=Math.round(mW*fit), dH=Math.round(mH*fit);
+  canvas.style.width=dW+'px'; canvas.style.height=dH+'px';
+  canvas.style.left=((W-dW)/2)+'px'; canvas.style.top=((H-dH+56)/2)+'px';
   uiCanvas.width=W; uiCanvas.height=H; uiCanvas.style.width=W+'px'; uiCanvas.style.height=H+'px';
 }
 
@@ -903,8 +910,10 @@ function isSolid(tx,ty){
     const hw=obj.hx!==undefined?obj.hw:obj.w;
     const hh=obj.hy!==undefined?obj.hh:obj.h;
     if(hw===0||hh===0) continue;
-    // Use 0.3/0.7 margins so player can get close without clipping
-    if(tx+0.3>hx&&tx+0.7<hx+hw&&ty+0.3>hy&&ty+0.7<hy+hh) return true;
+    // Player bounding box: 0.4 wide, 0.4 tall centred on (tx+0.5, ty+0.5)
+    const pL=tx+0.15, pR=tx+0.85, pT=ty+0.15, pB=ty+0.85;
+    const oR=hx+hw, oB=hy+hh;
+    if(pR>hx&&pL<oR&&pB>hy&&pT<oB) return true;
   }
   return false;
 }
@@ -916,15 +925,6 @@ function triggerDeath(){
 
 /* ══════ INTERACT ══════ */
 function tryInteract(){
-  if(gameState==='dialog'){
-    dialogIdx++;
-    if(dialogIdx>=dialogQueue.length){
-      if(pendingPickup){doPickup(pendingPickup);pendingPickup=null;return;}
-      if(pendingCoin){collectCoin();pendingCoin=false;return;}
-      gameState='playing';dialogObj=null;
-    }
-    return;
-  }
   if(gameState!=='playing') return;
   const off={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
   const [ox,oy]=off[player.facing];
@@ -932,59 +932,47 @@ function tryInteract(){
   const px2=Math.floor(player.tx),py2=Math.floor(player.ty);
 
   for(const obj of OBJECTS){
+    // coins: skip if not visible, but still check if visible
     if(obj._skip) continue;
-    const hit=(cx>=obj.tx&&cx<obj.tx+obj.w&&cy>=obj.ty&&cy<obj.ty+obj.h)||(px2>=obj.tx&&px2<obj.tx+obj.w&&py2>=obj.ty&&py2<obj.ty+obj.h);
+    const hit=(cx>=obj.tx&&cx<obj.tx+obj.w&&cy>=obj.ty&&cy<obj.ty+obj.h)
+           ||(px2>=obj.tx&&px2<obj.tx+obj.w&&py2>=obj.ty&&py2<obj.ty+obj.h);
     if(!hit) continue;
-    if(obj.isCoin&&coinVisible){showDialog(obj,obj.lines);pendingCoin=true;return;}
+    if(obj.isCoin){ showDialog(obj,obj.lines); pendingCoin=true; return; }
     if(obj.isMob&&obj.mobId==='kevin'){
       if(!obj.alive) return;
       if(!player.weapon) showDialog(obj,obj.lines);
-      else showDialog(obj,obj.linesArmed,()=>attackKevin());
+      else showDialog(obj,obj.linesArmed); // advanceDialog will call attackKevin when done
       return;
     }
     if(obj.pickable){
       if(player.inventory.find(i=>i.id===obj.itemId)) showDialog(obj,['"Tu l\'as déjà."']);
-      else{showDialog(obj,obj.lines);pendingPickup=obj;}
+      else{ showDialog(obj,obj.lines); pendingPickup=obj; }
       return;
     }
     showDialog(obj,obj.lines); return;
   }
-  if((cx===10||cx===11)&&cy===15||(px2===10||px2===11)&&py2===15)
+  if((cx===11||cx===12)&&cy===17||(px2===11||px2===12)&&py2===17)
     showDialog(null,['"La porte. Le MONDE."','"(Bientôt...)"']);
 }
 
-let kevinDialogDone=false;
-function showDialog(obj,lines,onDone){
+function showDialog(obj,lines){
   if(gameState==='dialog') return;
   dialogObj=obj; dialogQueue=lines; dialogIdx=0; gameState='dialog';
-  // Store callback for when dialog ends
-  window._dialogOnDone=onDone||null;
 }
 
 function advanceDialog(){
+  // Snapshot before advancing — needed to detect kevin armed
+  const wasKevinArmed = dialogObj && dialogObj.isMob && dialogObj.mobId==='kevin' && player.weapon;
+  const wasPendingPickup = pendingPickup;
+  const wasPendingCoin   = pendingCoin;
   dialogIdx++;
-  if(dialogIdx>=dialogQueue.length){
-    const cb=window._dialogOnDone; window._dialogOnDone=null;
-    if(pendingPickup){doPickup(pendingPickup);pendingPickup=null;return;}
-    if(pendingCoin){collectCoin();pendingCoin=false;return;}
-    gameState='playing';dialogObj=null;
-    if(cb) cb();
-  }
+  if(dialogIdx < dialogQueue.length) return; // more lines to show
+  // Dialog finished
+  gameState='playing'; dialogObj=null;
+  if(wasKevinArmed){ attackKevin(); return; }
+  if(wasPendingPickup){ pendingPickup=null; doPickup(wasPendingPickup); return; }
+  if(wasPendingCoin){ pendingCoin=false; collectCoin(); return; }
 }
-
-// Override tryInteract for dialog advance
-document.removeEventListener('keydown',()=>{});
-document.addEventListener('keydown',e=>{
-  keys[e.key.toLowerCase()]=true;
-  if(e.key.toLowerCase()==='e'){
-    if(gameState==='dialog') advanceDialog();
-    else tryInteract();
-  }
-  if(e.key.toLowerCase()==='q') toggleInventory();
-  if(e.key==='Escape') togglePause();
-},{capture:true});
-// Remove the old duplicate listener issue by flag
-window._worldListenerSet=true;
 
 function attackKevin(){
   player.attackTimer=1; kevinHitTimer=1; kevinAlive=false; kevinDeathTimer=0;
@@ -1229,14 +1217,14 @@ function drawHint(){
     if(obj._skip) continue;
     if(cx>=obj.tx&&cx<obj.tx+obj.w&&cy>=obj.ty&&cy<obj.ty+obj.h){nearObj=obj;break;}
   }
-  const nearDoor=(cx===10||cx===11)&&cy===15;
+  const nearDoor=(cx===11||cx===12)&&cy===17;
   if(!nearObj&&!nearDoor) return;
-  const tx2=nearObj?(nearObj.tx+nearObj.w/2)*S:10.5*S;
-  const ty2=nearObj?nearObj.ty*S-SCALE*6:15*S-SCALE*6;
+  const tx2=nearObj?(nearObj.tx+nearObj.w/2)*S:11.5*S;
+  const ty2=nearObj?nearObj.ty*S-SCALE*6:17*S-SCALE*6;
   let label='E',col=C.hintBg;
   if(nearObj?.isMob&&nearObj.alive&&player.weapon){label='E  ATTAQUER';col='#ff4040';}
   else if(nearObj?.pickable&&!player.inventory.find(i=>i.id===nearObj.itemId)) label='E  PRENDRE';
-  else if(nearObj?.isCoin&&coinVisible){label='E  +1€';col='#ffe600';}
+  else if(nearObj?.isCoin){label='E  +1€';col='#ffe600';}
   const bw=label.length>1?S*2.4:S*0.82;
   const pulse=0.82+0.18*Math.sin(Date.now()/250);
   ctx.save(); ctx.globalAlpha=pulse;
@@ -1280,7 +1268,7 @@ function restartGame(){
   isDead=false;deathTimer=0;kevinAlive=true;kevinHitTimer=0;kevinDeathTimer=-1;coinVisible=false;
   player.tx=3.0;player.ty=4.5;player.facing='down';player.frame=0;player.attackTimer=0;
   player.dignity=0;player.inventory=[];player.weapon=null;
-  pendingPickup=null;pendingCoin=false;window._dialogOnDone=null;
+  pendingPickup=null;pendingCoin=false;
   gameState='playing';dialogObj=null;dialogQueue=[];dialogIdx=0;
   if(!OBJECTS.find(o=>o.pickable&&o.itemId==='plunger')){
     OBJECTS.push({tx:17,ty:13,w:1,h:2,hx:17,hy:13,hw:1,hh:2,label:'Ventouse Sacrée ★',pickable:true,itemId:'plunger',itemName:'Ventouse Sacrée',itemDesc:'ATK +1 | Certifiée sur rongeurs.',

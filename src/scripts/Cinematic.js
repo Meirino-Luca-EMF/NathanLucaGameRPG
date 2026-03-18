@@ -83,7 +83,6 @@ function buildCinematicHTML() {
     <div class="lbox-bot"></div>
     ${scenes}
     <div class="dream-header">✦ &nbsp; Z Z Z . . . &nbsp; ✦ &nbsp; Z Z Z . . . &nbsp; ✦ &nbsp; Z Z Z . . . &nbsp; ✦</div>
-    <div class="dream-counter" id="dream-counter">DREAM 1 / ${DREAM_SCENES.length}</div>
     <div class="progress-dots">${dots}</div>
     <div class="narration-tape" id="narration-tape"></div>
     <div class="flash-layer" id="flash-layer"></div>
@@ -137,13 +136,11 @@ function runDreamSequence(overlay, onComplete) {
     currentScene = idx;
 
     const sceneEl = document.getElementById('scene-' + idx);
-    const counter = document.getElementById('dream-counter');
     const tape    = document.getElementById('narration-tape');
 
     spawnDreamFloaters('dfloat-' + idx, DREAM_SCENES[idx].floaters);
 
     sceneEl.classList.add('visible');
-    counter.textContent = 'DREAM ' + (idx + 1) + ' / ' + DREAM_SCENES.length;
     tape.classList.remove('visible');
     tape.textContent = '';
 
