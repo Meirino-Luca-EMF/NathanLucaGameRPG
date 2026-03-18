@@ -96,7 +96,7 @@ function initApp() {
         document.querySelector('.tape-top')?.remove();
         document.querySelector('.tape-bottom')?.remove();
         // launch game world
-        startWorld();
+        startWorld(true); // fresh=true wipes any previous save
       });
     }, 400);
   };
