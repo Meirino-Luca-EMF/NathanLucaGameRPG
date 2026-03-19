@@ -1,5 +1,16 @@
 # THIS FILE NEEDS TO BE UPDATED EVERY TIME AN ADDITION TO THE GAME IS MADE, DONT FORGET TO DO SO
 
+## Update by Nathan - 19/03/2026 - 11:21
+
+### Added :
+- a new district (street) called "Alley District"
+- Dialogs with NPCS and interactions with them
+
+### Modified :
+- The dialogs are now better looking with interactions
+
+---
+
 ## Update by Nathan - 18/03/2026 - 17:37
 
 ### Added : 
