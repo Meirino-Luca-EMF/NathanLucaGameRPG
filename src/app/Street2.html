@@ -1171,19 +1171,16 @@ function sUpdatePlayer(dt){
   if(sp.ty<=3.5&&sp.tx>=2.5&&sp.tx<=4.5 && !returnTriggered){
     triggerReturnHome();
   }
-  // Street exit east
+  // Street exit east → Street3
   if(sp.tx>=COLS-1 && !exitRight){
     exitRight=true;
-    // Future: load next street zone
-    DialogSystem.show({
-      speaker:'NARRATOR', speakerPortrait:'unknown', playerPortrait:'normal',
-      lines:[
-        { text:'You\'ve reached the end of the block.', speaker:'right' },
-        { text:'"More street. But not today\'s street."', speaker:'right' },
-        { text:'[More areas coming soon]', speaker:'right' },
-      ],
-      onClose(){ exitRight=false; sp.tx=COLS-1.5; }
-    });
+    sGameState='exiting';
+    saveState({money:sp.money,inventory:sp.inventory,weapon:sp.weapon,dignity:sp.dignity});
+    const fade=document.createElement('div');
+    fade.style.cssText='position:fixed;inset:0;background:#050508;z-index:9999;opacity:0;transition:opacity 0.8s ease;pointer-events:none;';
+    document.body.appendChild(fade);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ fade.style.opacity='1'; }));
+    setTimeout(()=>{ window.location.href='Street3.html'; },900);
   }
 }
 
