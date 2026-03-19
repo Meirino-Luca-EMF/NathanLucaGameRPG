@@ -1,5 +1,12 @@
 # THIS FILE NEEDS TO BE UPDATED EVERY TIME AN ADDITION TO THE GAME IS MADE, DONT FORGET TO DO SO
 
+
+## Update by Nathan - 19/03/2025 - 11:36
+
+### Added :
+- a casino accessible by alley district
+- games in said casino where you can gamble away every last $ you don't have
+
 ## Update by Nathan - 19/03/2026 - 11:21
 
 ### Added :

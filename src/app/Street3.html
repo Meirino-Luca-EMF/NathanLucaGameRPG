@@ -1357,10 +1357,30 @@ function sTryInteract(){
     if(hit){ obj.interact(); return; }
   }
   if(SMAP[cy]?.[cx]===_D || SMAP[py]?.[px]===_D){
-    DialogSystem.show({
-      speaker:'NARRATOR', speakerPortrait:'unknown', playerPortrait:'normal',
-      lines:[{ text:'A door into someone else\'s building. Not tonight.', speaker:'right' }],
-    });
+    // Casino doors: cols 66-67 on row 3 (north side, under CASINO neon)
+    const doorCol=(SMAP[cy]?.[cx]===_D)?cx:px;
+    const doorRow=(SMAP[cy]?.[cx]===_D)?cy:py;
+    const isCasinoDoor=doorRow<=3&&doorCol>=65&&doorCol<=68;
+    if(isCasinoDoor){
+      DialogSystem.show({
+        speaker:'NARRATOR',speakerPortrait:'unknown',playerPortrait:'surprised',
+        lines:[
+          {text:'LUCKY TUESDAY CASINO. The pink neon pulses above the door.',speaker:'right'},
+          {text:'"The bouncer looks at you. You look at the bouncer."',speaker:'right'},
+          {text:'"This is either the best or worst idea of the evening."',speaker:'left',expr:'surprised'},
+          {text:'"Probably both. It\'s Tuesday."',speaker:'left',expr:'normal'},
+        ],
+        onClose(){
+          saveState({money:sp.money,inventory:sp.inventory,dignity:sp.dignity});
+          doFade(()=>{ window.location.href='Casino.html'; });
+        }
+      });
+    } else {
+      DialogSystem.show({
+        speaker:'NARRATOR',speakerPortrait:'unknown',playerPortrait:'normal',
+        lines:[{text:'A door into someone else\'s building. Not tonight.',speaker:'right'}],
+      });
+    }
   }
 }
 
@@ -1599,18 +1619,22 @@ function sDrawHint(){
   }
   const nearDoor=SMAP[cy]?.[cx]===_D;
   if(!nearObj&&!nearDoor) return;
+  const isCasinoDoor=nearDoor&&cy<=3&&cx>=65&&cx<=68;
+  const label=isCasinoDoor?'🎰 CASINO':nearDoor?'ENTER ?':'E';
   const tx2=nearObj?(nearObj.tx+nearObj.w/2)*S:cx*S+S/2;
   const ty2=nearObj?nearObj.ty*S-SCALE*4:cy*S-SCALE*4;
-  const bw=S*2.2;
+  const bw=isCasinoDoor?S*4:S*2.2;
   const pulse=0.82+0.18*Math.sin(Date.now()/250);
   sCtx.save(); sCtx.globalAlpha=pulse;
   sCtx.fillStyle='rgba(0,0,0,0.4)';
   rRect(sCtx,tx2-bw/2+SCALE,ty2-S*0.35+SCALE,bw,S*0.56,SCALE*2); sCtx.fill();
-  sCtx.fillStyle=C.hintBg; sCtx.strokeStyle=C.hintTx; sCtx.lineWidth=SCALE;
+  sCtx.fillStyle=isCasinoDoor?'#ff40c0':C.hintBg;
+  sCtx.strokeStyle=C.hintTx; sCtx.lineWidth=SCALE;
   rRect(sCtx,tx2-bw/2,ty2-S*0.35,bw,S*0.56,SCALE*2); sCtx.fill(); sCtx.stroke();
-  sCtx.fillStyle=C.hintTx; sCtx.font=`bold ${SCALE*4}px monospace`;
+  sCtx.fillStyle=isCasinoDoor?'#fff':C.hintTx;
+  sCtx.font=`bold ${SCALE*(isCasinoDoor?3:4)}px monospace`;
   sCtx.textAlign='center'; sCtx.textBaseline='middle';
-  sCtx.fillText('E',tx2,ty2-S*0.08);
+  sCtx.fillText(label,tx2,ty2-S*0.08);
   sCtx.restore();
 }
 
