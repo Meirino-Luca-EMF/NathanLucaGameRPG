@@ -17,7 +17,7 @@ NATHANLUCAGAMERPG-1/
     │   └── World.js
     └── styles/
         ├── Cinematic.css
-    │   ├── Dialogsystem.js
+        ├── Dialogsystem.js
         └── Style.css
 ```
 
