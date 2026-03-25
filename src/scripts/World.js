@@ -3302,7 +3302,8 @@ function drawDeathScreen() {
 }
 
 function restartGame() {
-  clearGameState();
+  clearGameState(); // ← ajout en premier
+
   isDead = false;
   deathTimer = 0;
   exitTriggered = false;
@@ -3315,7 +3316,7 @@ function restartGame() {
   player.facing = "down";
   player.frame = 0;
   player.attackTimer = 0;
-  player.money = 0;
+  player.money = 0; // ← toujours 0 au restart
   player.dignity = 0;
   player.inventory = [];
   player.weapon = null;
